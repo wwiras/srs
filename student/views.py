@@ -11,12 +11,15 @@ from django.db.models import Count, Sum, Q, Case, Value, When, IntegerField
 
 # Create your views here.
 
+@login_required(login_url='/accounts/login/')
 def home(request):
 	return render(request,'base.html')
 
+@login_required(login_url='/accounts/login/')
 def home_json(request):
     return render(request, 'student/home_json.html')
 
+@login_required(login_url='/accounts/login/')
 def student_new(request):
 
     if request.method == "POST":
@@ -32,6 +35,7 @@ def student_new(request):
     print(request.user)
     return render(request, 'student/student_new.html', {'form': form})
 
+@login_required(login_url='/accounts/login/')
 def student_edit(request,pk):
 
     student = get_object_or_404(Student, pk=pk)
@@ -49,10 +53,12 @@ def student_edit(request,pk):
     
     return render(request, 'student/student_edit.html', {'form': form})
 
+@login_required(login_url='/accounts/login/')
 def student_detail(request,pk):
     student = get_object_or_404(Student, pk=pk)
     return render(request, 'student/student_detail.html', {'student': student})
 
+@login_required(login_url='/accounts/login/')
 def student_remove(request,pk):
 
     student = get_object_or_404(Student, pk=pk)
